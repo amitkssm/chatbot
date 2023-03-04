@@ -6,10 +6,10 @@ const questionSchema = new mongoose.Schema({
         trim: true,
         required: true
     },
-    
-    action_id: {
-        type: ObjectId,
-       
+
+    options : {
+        type: Array,
+        default: []
     },
 
     created_date: {
