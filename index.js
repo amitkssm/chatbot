@@ -2,12 +2,9 @@
  
 const express = require("express");
 const mongoose = require("mongoose");
-const { Parser } = require("json2csv")
-const {excelJS } = require('exceljs')
-const fs = require('fs')
-const {parse, stringify} = require('flatted');
-
 const cors = require("cors");
+
+
 require("./db/config");
 const Question = require("./db/question");
 

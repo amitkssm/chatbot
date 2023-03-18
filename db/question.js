@@ -9,7 +9,10 @@ const questionSchema = new mongoose.Schema({
 
     options : {
         type: Array,
-        default: []
+        default: [{
+            option:String,
+            actionId:String
+        }]
     },
 
     created_date: {
