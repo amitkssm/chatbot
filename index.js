@@ -65,6 +65,26 @@ app.get('/getQuestion',async(req,res)=>{
 });
 
 
+// app.get('/searchByString',async(req,res)=>{
+//     console.log('..............aaaaaaaaaa............')
+//     try {
+//         let question = req.body.question
+//        let result = await Question.find({ question: { $regex: question , $options: "i" }},{question:1});
+
+//         // let result = await Question.find({ '$text': {'$search' : question } } ).toArray(function(err, docs) {
+//         //     assert.equal(err, null);
+//         //     console.log("Found the following records");
+//         //     console.log(docs);
+//         //     callback(docs);
+//         //   }); 
+
+//         res.status(200).send(result);
+//         console.log(result);
+    
+//     } catch (error) {
+//         res.status(400).send(error);
+//     }
+// })
  
 
 app.listen((2222), () => {
