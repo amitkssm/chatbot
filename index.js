@@ -3,6 +3,10 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const pincodeDirectory = require("india-pincode-lookup");
+const zipcodes = require('zipcodes');
+
+var validator = require('gstin-validator');
 
 
 require("./db/config");
@@ -86,6 +90,83 @@ app.get('/getQuestion',async(req,res)=>{
 //     }
 // })
  
+
+
+app.post('/searchLocationByPincode',async(req,res)=>{
+    console.log("searchLocationByPincode")
+    let pincode = req.body.pincode ? req.body.pincode : ""
+    console.log("pincode : ",pincode)
+ try {
+     let result =  await pincodeDirectory.lookup(pincode)
+            console.log(result,"asasasasasas...........")
+        if (result) {
+            res.status(200).json({
+                error: false,
+                code: 200,
+                message: "successfully  ",
+                data: result
+            })
+        }
+        else {
+            res.status(401).json({
+                error: true,
+                code: 401,
+                message: "something went wrong",
+            })
+        }
+    
+ } catch (error) {
+    console.log(error)
+    res.status(401).json({
+        error: true,
+        code: 401,
+        message: "something went wrong",
+    })
+ }
+
+})
+
+
+app.post('/getDetailsByGSTIN',async(req,res)=>{
+    console.log("getDetailsByGSTIN")
+    let GSTnumber = req.body.GSTnumber ? req.body.GSTnumber : ""
+    console.log(GSTnumber)
+
+    try {
+        let result =  await validator.getGSTINInfo(GSTnumber);
+           if (result) {
+               res.status(200).json({
+                   error: false,
+                   code: 200,
+                   message: "Found Datails successfully  ",
+                   data: result
+               })
+           }
+           else {
+               res.status(201).json({
+                   error: true,
+                   code: 201,
+                   message: "something went wrong",
+               })
+           }
+       
+    } catch (error) {
+        console.log(error)
+       res.status(401).json({
+           error: true,
+           code: 401,
+           message: "something went wrong",
+           data : error
+       })
+    }
+})
+
+
+
+
+
+
+
 
 app.listen((2222), () => {
     console.log("app is running on port 2222")

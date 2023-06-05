@@ -24,3 +24,30 @@ const questionSchema = new mongoose.Schema({
 
 Question = mongoose.model("Questions", questionSchema);
 module.exports = Question
+
+
+const uploadExcel = new mongoose.Schema({
+    question: {
+        type: String,
+       
+    },
+
+    options : {
+        type: Array,
+        // default: [{
+        //     option:String,
+        //     actionId:String
+        // }]
+    },
+
+    created_date: {
+        type: Date,
+        default: Date.now
+    }
+
+});
+
+
+
+Question = mongoose.model("Questions", questionSchema);
+module.exports = Question
